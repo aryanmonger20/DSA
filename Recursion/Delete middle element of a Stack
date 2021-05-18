@@ -1,0 +1,65 @@
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+
+class Solution
+{
+    void del(stack<int>&s, int n){
+        if(n==1)
+        {
+            s.pop();
+            return;
+        }
+        
+        int k=s.top();
+        s.pop();
+        del(s,n-1);
+        s.push(k);
+    
+    }
+    
+    
+    public:
+    //Function to delete middle element of a stack.
+    void deleteMid(stack<int>&s, int sizeOfStack)
+    {  if(s.size()==0)
+            return;
+    
+    
+        int n= (sizeOfStack/2) +1;
+        del(s,n);
+    }
+};
+
+// { Driver Code Starts.
+int main() {
+    int t;
+    cin>>t;
+    
+    while(t--)
+    {
+        int sizeOfStack;
+        cin>>sizeOfStack;
+        
+        stack<int> myStack;
+        
+        for(int i=0;i<sizeOfStack;i++)
+        {
+            int x;
+            cin>>x;
+            myStack.push(x);    
+        }
+
+            Solution ob;
+            ob.deleteMid(myStack,myStack.size());
+            while(!myStack.empty())
+            {
+                cout<<myStack.top()<<" ";
+                myStack.pop();
+            }
+        cout<<endl;
+    }   
+    return 0;
+}
