@@ -1,0 +1,19 @@
+class Solution {
+    
+    
+   void reverse(vector<char>& str,int i)
+    {
+        if(i == str.size()/2) 
+            return;
+        swap(str[i] , str[str.size() - 1 - i]);
+        reverse(str,i + 1);
+    }
+public:
+    void reverseString(vector<char>& str) {
+       
+        reverse(str,0);
+    
+    
+         
+    }
+};
