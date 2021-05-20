@@ -1,0 +1,49 @@
+// help the old man !!
+
+// Initial Template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+// User function Template for C++
+
+void funct(int N,int a,int c,int& i,int n,vector<int>&v){
+if(N==1){
+i++;
+if(i==n){
+v.push_back(a);
+v.push_back(c);
+return;
+}
+return;
+}
+funct(N-1,a,6-(a+c),i,n,v);
+funct(1,a,c,i,n,v);
+funct(N-1,6-(a+c),c,i,n,v);
+}
+class Solution{
+public:
+    vector<int> shiftPile(int N, int n){
+       vector<int>v;
+int i=0;
+funct(N,1,3,i,n,v);
+return v;
+    }
+};
+
+// { Driver Code Starts.
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int N, n;
+        cin>>N>>n;
+        
+        Solution ob;
+        vector<int> ans = ob.shiftPile(N, n);
+        cout<<ans[0]<<" "<<ans[1]<<endl;
+    }
+    return 0;
+}  // } Driver Code Ends
