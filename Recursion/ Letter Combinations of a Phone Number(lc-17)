@@ -1,0 +1,34 @@
+class Solution {
+    public:vector<string> map = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}, v;
+    
+    void solve(string dig,int i,string ans){
+      
+        if(i==dig.size())
+        {
+            
+            v.push_back(ans);
+            
+            return;
+        }
+       
+        for(auto c:map[dig[i]-'2']){
+            solve(dig,i+1,ans+c);
+        }
+        return;
+        
+    }
+public:
+    vector<string> letterCombinations(string dig) {
+       vector<string>k;
+        if(dig.size()==0)
+        {
+            return k;
+        }
+        else{
+            solve(dig,0,"");
+        
+        return v;
+        }
+        
+    }
+};
