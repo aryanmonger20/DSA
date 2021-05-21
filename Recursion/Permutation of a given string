@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+class Solution
+{
+	public:
+void solve(int l,int r,string s,vector<string>&v)
+{
+if(l==r)
+{
+v.push_back(s);
+return ;
+}
+else
+{
+for(int i=l;i<=r;i++)
+{
+swap(s[l],s[i]);
+solve(l+1,r,s,v);
+swap(s[l],s[i]);
+}
+}
+return;
+
+}
+		vector<string>find_permutation(string S)
+		{
+		    int n=S.size();
+vector<string>v;
+solve(0,n-1,S,v);
+sort(v.begin(),v.end());
+return v;
+
+		}
+};
+
+
+
+// { Driver Code Starts.
+int main(){
+    int t;
+    cin >> t;
+    while(t--)
+    {
+	    string S;
+	    cin >> S;
+	    Solution ob;
+	    vector<string> ans = ob.find_permutation(S);
+	    for(auto i: ans)
+	    {
+	    	cout<<i<<" ";
+	    }
+	    cout<<"\n";
+    }
+	return 0;
+}
+  // } Driver Code Ends
