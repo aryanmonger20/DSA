@@ -1,0 +1,29 @@
+class Solution{
+    
+  
+public:
+    vector<ll> nthRowOfPascalTriangle(int n) {
+        ll mod=1000000007;
+        
+      vector<ll> ans;
+      
+      if(n==1)
+      {
+         ans.push_back(1);
+         return ans;
+      }
+       
+     vector<ll> last= nthRowOfPascalTriangle(n-1);
+      ans.push_back(1);
+     for(int i=1;i<n-1;i++)
+     {
+         
+         ll k=(last[i]+last[i-1])%mod;
+         ans.push_back(k);
+     }
+     ans.push_back(1);
+     return ans;
+     
+     
+    }
+};
