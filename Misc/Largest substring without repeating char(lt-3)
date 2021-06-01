@@ -1,0 +1,30 @@
+public:
+    int lengthOfLongestSubstring(string s) {
+        
+        int k=s.length();
+        int i,j,p=0,max=0,c=0;
+      int map[256]={0};
+        
+        for(i=0;i<k;i++){
+            map[s[i]]++;
+            
+            while(map[s[i]]>1){
+                
+                map[s[p]]--;
+                p++;
+                //c=0;
+            }
+          
+                c=i-p+1;
+                if(c>max){
+                    max=c;
+                
+            }
+            
+            
+            
+        }
+        return max;
+        
+    }
+};
