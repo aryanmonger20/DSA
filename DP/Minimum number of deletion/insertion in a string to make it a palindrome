@@ -1,5 +1,6 @@
 class Solution{
   public:
+  //true for no of insertion too....
     int minimumNumberOfDeletions(string s) { 
         
         string b=s;
@@ -23,7 +24,7 @@ class Solution{
 	       }
 	   }
        //min no:lengthof string -longestPalindromeSubseq
-       
+
         return m-dp[m][m];
     
     } 
