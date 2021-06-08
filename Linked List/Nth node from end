@@ -1,0 +1,25 @@
+int getNthFromLast(struct Node *head, int n)
+{
+   
+   struct Node* fast=head;
+  struct Node* slow=head;
+    
+    int diff=0;
+    while(fast!=NULL){
+        fast=fast->next;
+        
+        diff++;
+        
+        if(diff>n){
+            slow=slow->next;
+        }
+    }
+   
+    if(n>diff)
+    {
+        return -1;
+    }
+    else
+    return slow->data;
+    
+}
