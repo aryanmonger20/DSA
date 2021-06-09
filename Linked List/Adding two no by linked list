@@ -1,0 +1,91 @@
+struct Node {
+    int data;
+    struct Node* next;
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+
+*/
+
+class Solution
+{
+     struct Node* reverse(struct Node *head)
+    { 
+        struct Node* temp1=head,*temp2=NULL,*prev=NULL;
+        
+        while(temp1!=NULL){
+            
+            temp2=temp1->next;
+            temp1->next=prev;
+            prev=temp1;
+            temp1=temp2;
+        }
+        return prev;
+    }
+    public:
+    //Function to add two numbers represented by linked list.
+    struct Node* addTwoLists(struct Node* first, struct Node* second)
+    {
+        // code here
+        struct Node *head =NULL,*curr=NULL,*temp;
+        int carry=0,sum=0;
+        
+        first=reverse(first);
+        second =reverse(second);
+       // return second;
+        
+        while(first!=NULL||second!=NULL)
+        {
+            int a = (first != NULL)?first -> data:0;
+            int b = (second != NULL)?second -> data:0;
+            
+            sum=a+b+carry;
+            if(sum>=10)
+            {
+                sum=sum%10;
+                carry=1;
+            }
+            else
+            carry=0;
+            
+          // cout<< sum;
+           temp = new Node(sum % 10);
+            //creating new node and pointing it with curr;
+            if(head == NULL)
+                {
+                head = temp;
+                curr = head;
+                }
+                
+                else
+                {
+                curr->next = temp;
+                curr = temp;
+                }
+
+            
+            if(first!=NULL){
+                first=first->next;
+            }
+            if(second!=NULL){
+                second=second->next;
+            }
+            //case if last addn exceeds 10;
+            
+           
+          //  return start;
+            
+            
+        }
+         if(carry>0){
+                curr->next=new Node(carry);
+                
+            }
+        return reverse(head);
+        
+        
+        
+    }
+};
