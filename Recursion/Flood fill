@@ -1,0 +1,31 @@
+class Solution {
+public:
+void solve(vector<vector<int>>& img, int sr, int sc, int newcolor, int row, int col, int old){
+    if(sc<0||sr<0||sc>=col||sr>=row){
+        return ;
+    }
+    if(img[sr][sc]!=old||img[sr][sc]==newcolor)
+    return ;
+    
+    if(img[sr][sc]==old)
+    img[sr][sc]=newcolor;
+    
+    solve(img,sr+1,sc,newcolor,row,col,old);
+    solve(img,sr-1,sc,newcolor,row,col,old);
+    solve(img,sr,sc+1,newcolor,row,col,old);
+    solve(img,sr,sc-1,newcolor,row,col,old);
+    
+    return;
+}
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+        // Code here 
+        int row = image.size();
+        int col = image[0].size();
+        
+        vector<vector<int>>img = image;
+        int oldColor = image[sr][sc];
+        
+      solve(img, sr, sc, newColor, row, col, oldColor);
+      return img;
+    }
+};
