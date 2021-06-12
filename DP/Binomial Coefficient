@@ -1,3 +1,6 @@
+Using the property of binom coeff:
+ C(n, k) = C(n-1, k-1) + C(n-1, k)
+   C(n, 0) = C(n, n) = 1
 
     int solve(int n,int r){
         if(n==0||r==0||n==r){
