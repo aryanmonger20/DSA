@@ -1,0 +1,31 @@
+Using property:
+P(n, k) = P(n-1, k) + k* P(n-1, k-1)
+
+class Solution{
+    int solve(int n,int r){
+        if(r==0){
+            return 1;
+        }
+        if(dp[n][r]!=0)
+        return dp[n][r];
+        
+       return dp[n][r]= (r*solve(n-1,r-1)%mod+ solve(n-1,r)%mod)%mod;
+      // return ans;
+    }
+public:
+long mod=1000000007;
+int dp[1001][1001];
+    int nCr(int n, int r){
+        // code here
+        
+        
+       memset(dp,0,sizeof(dp));
+        if(r>n)
+        return 0;
+        else
+        if(n==r)
+        return 1;
+        else
+      return  solve(n,r);
+    }
+};
