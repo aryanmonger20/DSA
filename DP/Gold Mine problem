@@ -1,0 +1,32 @@
+class Solution{
+    int solve(int i, int j,int n, int m, vector<vector<int>> &M){
+        if(i>=n||j>=m||i<0)
+        return 0;
+        
+        //reaching the last column
+        if(j==m-1)
+        return M[i][j];
+        
+        if(dp[i][j]!=-1)
+        return dp[i][j];
+        
+      return  dp[i][j]=M[i][j]+ max(max(solve(i,j+1,n,m,M),solve(i+1,j+1,n,m,M)),
+        solve(i-1,j+1,n,m,M));
+        
+     
+    }
+public: int dp[52][52];
+    int maxGold(int n, int m, vector<vector<int>> M)
+    {
+        memset(dp,-1,sizeof(dp));
+        // code herei
+       int ans = -1;
+        for(int i = 0; i < n; i++){
+        int max = solve(i,0,n,m,M);
+        
+        if(max > ans)
+        ans=max;
+        }
+        return ans;
+    }
+};
