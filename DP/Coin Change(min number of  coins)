@@ -18,7 +18,7 @@ class Solution{
 	  }
 	  
       //initialising 1st row
-      
+      //checking if single coin can be the ans;
 	  for(i=1;i<=tar;i++)
 	  {
 	  if(i%coins[0]!=0)
