@@ -1,0 +1,44 @@
+
+/*Complete the code here.
+Node is as follows:
+struct Node
+{
+  int data;
+  Node* left;
+  Node* right;
+};
+*/
+class Solution{
+   
+    Node* solve(int in[],int pre[], int str,int end,int &preIndex){
+        
+        if(str>end)
+        return NULL;
+        
+        Node *root= new Node(pre[preIndex++]);
+        
+        int inIndex;
+        
+        for(int i=str;i<=end;i++){
+            if(in[i]==root->data)
+             {inIndex=i;
+             break;
+             }
+        }
+        
+        root->left=solve(in,pre,str,inIndex-1,preIndex);
+        root->right=solve(in,pre,inIndex+1,end,preIndex);
+        
+        return root;
+        
+    }
+    
+    public:
+    Node* buildTree(int in[],int pre[], int n)
+    {
+        int preIndex=0;
+        // Code here
+      Node *root=solve(in,pre,0,n-1,preIndex);
+      return root;
+    }
+};
