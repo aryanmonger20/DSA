@@ -1,0 +1,29 @@
+class Solution
+{
+    public:
+    bool bst(Node* root,int max,int min){
+        if(root==NULL)
+        return true;
+        
+        if(root->data<=min||root->data>=max)
+        return false;
+        
+        bool x=bst(root->left,root->data,min);
+      bool y=bst(root->right,max,root->data);
+        
+        if(x&&y)
+        return true;
+        else
+        return false;
+    }
+    //Function to check whether a Binary Tree is BST or not.
+    bool isBST(Node* root) 
+    {
+        // Your code here
+        if(root==NULL)
+        return true;
+        
+        return bst(root,INT_MAX,INT_MIN);
+       
+    }
+};
