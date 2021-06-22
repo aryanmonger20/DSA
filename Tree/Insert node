@@ -28,4 +28,39 @@ public:
 };
 
 
-/////////
+/////////Iterative//////
+
+class Solution {
+public:
+    TreeNode* insertIntoBST(TreeNode* root, int key) {
+        TreeNode* temp=new TreeNode(key);
+        if(root==NULL)
+            return temp;
+        TreeNode*curr=root;
+        TreeNode*parent;
+        
+        while(curr!=NULL){
+            
+            parent=curr;
+           
+            
+            if(curr->val>key)
+                curr=curr->left;
+            else
+                if(curr->val<key)
+                    curr=curr->right;
+            
+        }
+        
+        if(parent==NULL)
+            return temp;
+        else
+            if(parent->val<key)
+                parent->right=temp;
+        else
+            parent->left=temp;
+        
+            return root;
+    }
+
+};
