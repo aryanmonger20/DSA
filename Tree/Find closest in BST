@@ -1,0 +1,45 @@
+
+class Solution
+{
+    public:
+    //Function to find the least absolute difference between any node
+	//value of the BST and the given integer.
+	
+	Node*solve(Node *root, int k){
+	    Node *ans=NULL;
+	    int min=INT_MAX;
+	    while(root!=NULL){
+	        
+	        if(root->data==k)
+	        return root;
+	        else
+	        if(root->data>k){
+	            int l=root->data;
+	            
+	            if(abs(l-k)<min)
+	           {min =abs(l-k);
+	               ans=root;}
+	            
+	            root=root->left;
+	        }
+	        
+	        else{
+	       int l=root->data;
+	        if(abs(l-k)<min)
+	       { min =abs(l-k);
+	        ans=root;}
+	        
+	        root=root->right;
+	        }
+	        
+	    }
+	    return ans;
+	}
+    int minDiff(Node *root, int K)
+    {
+        //Your code here
+        Node*res=solve(root,K);
+        int sol=K-res->data;
+        return abs(sol);
+    }
+};
