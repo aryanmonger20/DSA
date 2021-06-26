@@ -1,0 +1,43 @@
+struct Node
+{
+    int data;
+    Node *left, *right;
+    Node(int val)
+    {
+        data = val;
+        left = right = NULL;
+    }
+};
+*/
+
+class Solution {
+public:
+   
+  void solve( Node* root, Node* &prev, Node* &first,Node* &sec){
+      
+       if(!root) return;
+        
+        solve(root->left,prev,first,sec);
+        
+        if(prev!=NULL&& root->data <prev->data){
+            if(first==NULL)
+           { first=prev;
+               sec=root;
+           }
+           else
+            
+            sec=root;
+        }
+        prev=root;
+        solve(root->right,prev,first,sec);
+    }
+   struct Node *correctBST( struct Node* root )
+    {
+        // add code here.
+        Node *prev=NULL,*first=NULL,*sec=NULL;
+        solve(root,prev,first,sec);
+        
+        swap(first->data,sec->data);
+        return root;
+    }
+};
