@@ -1,0 +1,22 @@
+class Solution{
+  public:
+  void solve(Node *root,map<int,int>&m,int lev){
+      if(root==NULL)
+      return ;
+      
+      solve(root->left,m,lev-1);
+      m[lev]+=root->data;
+      solve(root->right,m,lev+1);
+      
+  }
+    vector <int> verticalSum(Node *root) {
+        // add code here.
+        map<int,int>m;
+        solve(root,m,0);
+        vector<int>v;
+        for(auto i:m){
+            v.push_back(i.second);
+        }
+        return v;
+    }
+};
