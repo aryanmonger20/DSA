@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int findJudge(int n, vector<vector<int>>& trust) {
+      
+        if(n==1&&trust.empty()==true)
+            return 1;
+            
+         int tr[n+1];
+        bool vis[n+1];
+        for(int i=0;i<=n;i++){
+            tr[i]=0;
+            vis[i]=false;
+        }
+       
+        
+        bool jd[n+1];
+        
+        for(auto i:trust){
+            tr[i[1]]++;
+            vis[i[0]]=true;
+        }
+        int ans=-1;
+        for(int i=0;i<=n;i++){
+            if(tr[i]==n-1&&vis[i]==false)
+              {  ans=i;
+            break;}
+        }
+        return ans;
+    }
+};
