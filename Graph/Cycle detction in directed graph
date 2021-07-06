@@ -1,0 +1,34 @@
+class Solution
+{
+    public:
+    bool solve(	vector<bool> &vis,vector<bool> &stk,vector<int> adj[],int s){
+        
+        vis[s]=true;
+        stk[s]=true;
+        
+        for(auto i:adj[s]){
+            if(vis[i]==false &&  solve(vis,stk,adj,i))
+            {return true;}
+               else
+               if(stk[i]==true)
+               return true;
+        }
+        stk[s]=false;
+        return false;
+        
+    }
+	//Function to detect cycle in a directed graph.
+	bool isCyclic(int V, vector<int> adj[]) 
+	{
+	   	// code here
+	   	vector<bool>vis(V,false);
+	   	vector<bool>stk(V,false);
+	   	
+	   	for(int i=0;i<V;i++){
+	   	    if(vis[i]==false)
+	   	        if(solve(vis,stk,adj,i))
+	   	        return true;
+	   	}
+	   	return false;
+	}
+};
