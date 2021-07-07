@@ -1,0 +1,43 @@
+class Solution
+{
+	public:
+	//Function to return list containing vertices in Topological order. 
+	vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	    // code here
+	    int in[V+1]={0};
+	    
+	    vector<int> ans;
+	    
+	    //getting the inorder deg of all vertices
+	    for(int v=0;v<V;v++)
+	    for(auto i:adj[v]){
+	        in[i]++;
+	    }
+	    
+	    queue<int> q; 
+	    
+	    //all zero deg vertices 
+	    for(int i=0;i<V;i++){
+	        if(in[i]==0)
+	            q.push(i);
+	    }
+	    
+	    
+	            while(!q.empty()){
+	                int u=q.front();
+	   
+	                ans.push_back(u);
+	                q.pop();
+	                
+	                //after popping decreasing in deg of every connected vertex
+	                for(auto k:adj[u])
+	                    if(--in[k]==0)
+	                    q.push(k);
+	            }
+	            
+	            return ans;
+	            
+	    
+	}
+};
