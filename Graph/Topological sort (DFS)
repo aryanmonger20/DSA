@@ -1,0 +1,36 @@
+
+class Solution
+{
+	public:
+	 
+	void solve(vector<bool> &vis,int s,vector<int> adj[],stack<int> &stk){
+	     vis[s]=true;
+	     
+	     for(auto i:adj[s])
+	        {
+	            if(vis[i]==false)
+	                solve(vis,i,adj,stk);
+	        }
+	         stk.push(s);
+	}
+	//Function to return list containing vertices in Topological order. 
+	vector<int> topoSort(int V, vector<int>adj[]) 
+	{
+	 
+	   stack<int>stk;
+	 	vector<bool>vis(V,false);
+	    // code here
+	    for(int i=0;i<V;i++){
+	        if(vis[i]==false)
+	            solve(vis,i,adj,stk);
+	    }
+	      vector<int>v;
+	    
+	    while(stk.empty()==false){
+        int u=stk.top();
+        v.push_back(u);
+        stk.pop();
+	    }
+	    return v;
+	}
+};
