@@ -1,0 +1,51 @@
+class Solution {
+public:
+     vector<int> graph[5000];
+       int indeg[5000] = {0};
+    
+    
+    void add(int m,int n){
+        graph[m].push_back(n);
+        indeg[n]++;
+    }
+    
+   bool solve(int n){
+       
+       int c=0;
+       queue<int>q;
+       for(int i=0;i<n;i++){
+           if(indeg[i]==0)
+               q.push(i);
+       }
+       
+       while(!q.empty()){
+           int u=q.front();
+                q.pop();
+           
+               for(auto i:graph[u])
+               {
+                   if(--indeg[i]==0)
+                       q.push(i);
+               }
+           c++;
+                   
+              
+       }
+       if(c!=n)
+       return false;
+       else
+           return true;
+   }
+    
+    
+    bool canFinish(int numCourses, vector<vector<int>>& prereq) {
+        
+        for(auto i:prereq){
+            add(i[0],i[1]);
+        }
+        int n=prereq.size();
+       
+        return solve(numCourses);
+        
+    }
+};
