@@ -1,0 +1,35 @@
+class Solution
+{
+	public:
+	//Function to find the shortest distance of all the vertices
+    //from the source vertex S.
+    vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
+    {
+        // Code here
+        vector<bool>vis(V,false);
+        
+        vector<int>dis(V,INT_MAX);
+        
+        dis[S]=0;
+        
+        for(int c=0;c<V;c++){
+           
+            int u=-1;
+            
+            for(int i=0;i<V;i++){
+                if(vis[i]==false && (u==-1 || dis[i]<dis[u]))
+                u=i;
+            }
+            vis[u]=true;
+            
+            for(auto x:adj[u]){
+                if(x[1]!=0 && vis[x[0]]==false ){
+                   
+                  dis[x[0]]=min(dis[x[0]],x[1]+dis[u]);
+                }
+            }
+           
+        }
+         return dis;
+    }
+};
