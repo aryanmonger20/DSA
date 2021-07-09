@@ -1,0 +1,36 @@
+
+class Solution
+{
+	public:
+	//Function to find sum of weights of edges of the Minimum Spanning Tree.
+    int spanningTree(int V, vector<vector<int>> adj[])
+    {
+        // code here
+        int ans=0;
+        vector<int>key(V,INT_MAX);
+        
+        vector<bool>mset(V,false);
+        
+        key[0]=0;
+        for(int c=0;c<V;c++){
+            int u=-1;
+            
+            for(int i=0;i<V;i++){
+                if(mset[i]==false &&(u==-1||key[i]<key[u]))
+               {// cout<<"key i:"<< i<< " "<<key[i]<<" key u:"<< u<< " "<<key[u]<<endl;
+                u=i;}
+            }
+           // cout<<"out"<<endl;
+            mset[u]=true;
+            ans=ans+key[u];
+            
+            for(auto x:adj[u]){
+               // cout<<u <<" "<<x[0]<<" "<<x[1]<<endl;
+                if(x[1]!=0 &&mset[x[0]]==false)
+                key[x[0]]=min(key[x[0]],x[1]);
+                
+            }
+        }
+        return ans;
+    }
+};
