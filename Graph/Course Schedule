@@ -1,3 +1,7 @@
+// 1)making Graph nd storing indegree
+   2)
+
+
 class Solution {
 public:
      vector<int> graph[5000];
@@ -29,7 +33,6 @@ public:
                }
            c++;
                    
-              
        }
        if(c!=n)
        return false;
