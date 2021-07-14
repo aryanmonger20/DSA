@@ -1,0 +1,61 @@
+class Solution
+{
+	public:
+
+	
+	//1. Sort the dfs traversal according to finish time using a stack;
+// 2.Make a new graph with all the edge directions reversed;
+// 3.Traverse the elements in stack and count the no. of dfs traversals;
+
+
+//DFS
+   void dfs(int u, vector<int>adj[], bool *vis, stack<int> &s){
+    vis[u] = true;
+    
+    for(int v: adj[u]){
+        if(!vis[v]){
+            dfs(v, adj, vis, s);
+        }
+    }
+    s.push(u);
+}
+
+	//Function to find number of strongly connected components in the graph.
+int kosaraju(int V, vector<int> adj[])
+{
+    // Your code here
+    stack<int> s;
+    int count = 0;
+    
+    bool vis[V];    memset(vis, false, sizeof(vis));
+    for(int i=0; i<V; i++){
+        if(!vis[i]){
+            dfs(i, adj, vis, s);
+        }
+    }
+    
+    vector<int> transpose[5000];
+    
+    
+    //reversing
+    for(int i=0; i<V; i++){
+        for(int v: adj[i]){
+            transpose[v].push_back(i);
+        }
+    }
+    
+    stack<int> st;
+    count = 0;
+    memset(vis, false, V);
+    
+    //Again dfs to find connected components
+    while(!s.empty()){
+        if(!vis[s.top()]){
+            dfs(s.top(), transpose, vis, st);
+            count++;
+        }
+        s.pop();
+    }    
+    return count;
+}
+};
