@@ -1,0 +1,78 @@
+class Solution {
+    
+public:
+  vector<int>v;
+  
+ void left(Node* root, vector<int>&v)
+{
+     if(root == NULL)
+    return;
+    
+    if(root->left != NULL)
+    {
+        v.push_back(root->data);
+       left(root->left,v);
+    }
+    else if(root->right != NULL)
+    {
+        v.push_back(root->data);
+        left(root->right,v);
+    }
+}
+   
+  
+void leaf(Node *root){
+   if (!root)
+        return;
+     
+      
+      leaf(root->left);
+      
+    if (!root->left && !root->right)
+    {
+     v.push_back(root->data);
+ 
+    }
+            
+    
+            leaf(root->right);
+        
+    }
+    
+void right(Node* root,vector<int>&v)
+{
+    if(root == NULL)
+    return;
+    
+    if(root->right != NULL)
+    {
+        right(root->right,v);
+        v.push_back(root->data);
+    }
+    else if(root->left != NULL)
+    {
+        right(root->left,v);
+        v.push_back(root->data);
+    }
+    
+}
+    vector <int> printBoundary(Node *root)
+    {
+        //Your code here
+     
+      
+      if(root ==NULL)
+        return v;
+        
+         v.push_back(root->data);
+        
+         left(root->left,v);  
+         leaf(root->left);
+         leaf(root->right);
+         right(root->right,v);
+         
+       
+    
+        return v;
+    }
+};
