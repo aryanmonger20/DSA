@@ -1,0 +1,47 @@
+class Solution {
+public:
+    int countSubstrings(string s) {
+        
+        int n=s.size();
+        
+        int ans=0;
+        bool dp[n][n];
+        
+        memset(dp,false,sizeof(dp));
+        
+        //single letters 
+        for(int i=0;i<n;i++ )
+        {
+            dp[i][i]=true;
+            ans++;
+                
+            
+        }
+        
+        //for paln str of size 2
+        for(int i=0;i<n-1;i++){
+            if(s[i]==s[i+1])
+                {
+                ans++;
+                dp[i][i+1] = true;
+                }
+        }
+        
+        cout<<ans;
+        //paln size >=3
+        
+         for(int len=3;len<=n;len++) {  //check for palindromes of length 3 to n
+            for(int i=0;i<n-len+1;i++) {
+                int j = i+len-1;
+                if(s[i]==s[j] && dp[i+1][j-1])  { //tip:  a palindrome is made up of palidrome(s)
+                    dp[i][j] = true;
+                    ans++;
+                }
+            }
+        }
+        
+        return ans;
+            
+        }
+    
+};
