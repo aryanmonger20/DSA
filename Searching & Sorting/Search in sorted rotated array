@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int binary(vector<int>& arr, int l, int h, int key){
+        if(l>h)
+            return -1;
+        
+        
+        int mid=(l+h)/2;
+        if(arr[mid]==key)
+            return mid;
+        
+        if(arr[mid]>=arr[l]){
+            if(key<=arr[mid] && key>=arr[l])
+                return binary(arr,l,mid-1,key);
+            else
+                return binary(arr,mid+1,h,key);
+        }
+        
+        if(key<=arr[h] && key>=arr[mid])
+            return binary(arr,mid+1,h,key);
+        else
+            return binary(arr,l,mid-1,key);
+    }
+    
+    int search(vector<int>& nums, int target) {
+        
+      
+       return  binary(nums,0,nums.size()-1,target);
+    }
+};
