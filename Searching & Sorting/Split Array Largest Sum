@@ -1,0 +1,59 @@
+class Solution {
+public:
+    bool isValid(vector<int>& arr,int n,int m,int max){
+        int std=1;
+        int sum=0;
+        
+        for(int i=0;i<n;i++){
+            sum=sum+arr[i];
+            
+            if(sum>max)
+            {
+                sum=arr[i];
+                std++;
+            }
+        }
+        if(std>m)
+        return false;
+        
+        return true;
+    }
+    int splitArray(vector<int>& arr, int m) {
+        int n=arr.size();
+        if(m>n)
+        return -1;
+        
+        int tot=0;
+        int maxm=INT_MIN;
+        for(int i=0;i<n;i++){
+            tot+=arr[i];
+            maxm=max(maxm,arr[i]);
+        }
+        
+        if(m==1)
+            return tot;
+        
+        int start=maxm;
+        int end=tot;
+        
+        int res=INT_MAX;
+   
+            while(start<=end){
+                
+                int mid= start+(end-start)/2;
+                cout<<mid<<endl;
+               
+                if(isValid(arr,n,m,mid))
+                {
+                   
+                    res=mid;
+                    
+                    end=mid-1;
+                }
+                else
+                start=mid+1;
+                
+            }
+            return res;
+    }
+};
