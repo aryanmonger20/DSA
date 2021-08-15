@@ -1,0 +1,27 @@
+
+////////Preorder///////
+vector<int> preOrder(Node* root)
+{
+    //code here
+     vector<int>ans;
+        stack<Node*>s;
+         s.push(root);
+        
+        while(s.empty()==false){
+      
+     
+           while(root!=NULL)
+           
+           {  
+         
+          ans.push_back(root->data);
+             s.push(root);
+             root=root->left;
+            
+        }
+        root=s.top();
+          s.pop();
+        root=root->right;
+        }
+        return ans;
+}
