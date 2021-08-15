@@ -48,3 +48,28 @@ vector<int> preOrder(Node* root)
         }
         return ans;
 }
+
+////////Postorder///////
+
+vector<int> postOrder(Node* root) {
+    // code here
+     vector<int>ans;
+        stack<Node*>s;
+       s.push(root);
+        
+        while(s.empty()==false){
+      
+        root=s.top();
+          s.pop();
+          ans.push_back(root->data);
+          
+           if(root->left!=NULL)
+            s.push(root->left);
+        
+            if(root->right!=NULL)
+            s.push(root->right);
+        }
+       
+        reverse(ans.begin(),ans.end());
+        return ans;
+}
