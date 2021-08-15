@@ -1,0 +1,52 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        int l1=s.size();
+        int l2=t.size();
+      
+        if(l1<l2)
+            return "";
+        
+       
+        
+     int hash_l1[256] = { 0 };
+    int hash_l2[256] = { 0 };
+        
+        for(int i=0;i<l2;i++)
+            hash_l2[t[i]]++;
+        
+         int start = 0, curr = -1, min_len = INT_MAX,count=0;
+       
+        for(int i=0;i<l1;i++){
+            hash_l1[s[i]]++;
+            
+            if(hash_l1[s[i]] <= hash_l2[s[i]])
+                count++;
+       if (count == l2) {
+           
+            // Try to minimize the window
+            while (hash_l1[s[start]] > hash_l2[s[start]]|| hash_l2[s[start]] == 0) {
+ 
+                if(hash_l1[s[start]] > hash_l2[s[start]])
+                   hash_l1[s[start]]--;
+                
+                start++;
+            }
+ 
+            // update window size
+            int len_window = i - start + 1;
+            if (min_len > len_window) {
+                min_len = len_window;
+                curr = start;
+            }
+            }
+        }
+        
+         if (curr == -1) {
+        return "";
+    }
+         return s.substr(curr, min_len);
+        
+        
+    }
+};
