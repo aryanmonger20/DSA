@@ -31,7 +31,7 @@ class Solution
                { fast=fast->next;
                    
                }
-                
+             
                 fast->next=NULL;
                 return;
             }

@@ -1,0 +1,46 @@
+
+class Solution{
+    public: vector<string>ans;
+   
+   void path(vector<vector<int>> &m,int x,int y,int n,string s){
+       
+            if(x<0 || y<0 || x>=n || y>=n || m[x][y]!=1)
+            {
+                return;
+            }
+        if(x==n-1 && y==n-1)
+        { 
+         ans.push_back(s);
+        return ;
+        }
+        
+
+       
+        m[x][y]=-1;
+       path(m,x+1,y,n,s +'D');
+        
+        path(m,x,y+1,n,s+"R");
+        
+        (path(m,x-1,y,n,s+"U"));
+       
+        
+        (path(m,x,y-1,n,s+"L"));
+        
+        m[x][y]=1;
+         
+        
+       
+    
+    }
+    
+    vector<string> findPath(vector<vector<int>> &m, int n) {
+        // Your code goes here
+        
+        
+        (path(m,0,0,n,""));
+        
+   
+         sort(ans.begin(),ans.end());
+        return ans;
+    }
+};
