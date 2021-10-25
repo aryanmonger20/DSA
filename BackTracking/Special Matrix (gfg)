@@ -1,0 +1,48 @@
+// a version of rat in maze
+
+
+class Solution {
+public:
+	  
+	
+	int FindWays(int n, int m, vector<vector<int>>bcs){
+	    // Code here
+	    vector<vector<int>> arr(n+1, vector<int> (m+1, 1));
+	     vector<vector<int>> dp(n+1, vector<int>(m+1, -1));
+
+	    for(auto x :bcs)
+	    {
+	      
+	       arr[x[0]-1][x[1]-1]=-1;
+	    }
+	    
+	  
+	   int ans= ways(arr,0,0,n,m,dp);
+	   return ans;
+	 
+	}
+	
+int ways(vector<vector<int>> &arr,int x,int y,int n,int m,vector<vector<int>> &dp){
+	     const int mod = 1e9 + 7;
+	     
+	    if(x<0 || y<0 || x>=n || y>=m || arr[x][y]==-1)
+            {
+                return 0;
+            }
+            
+            if(x==n-1 && y==m-1 && arr[x][y]!=-1)
+             { 
+                
+                return 1;
+             }
+             
+           if(dp[x][y] != -1)
+           return dp[x][y];
+           
+    return dp[x][y]=( ways(arr,x+1,y,n,m,dp)+ ways(arr,x,y+1,n,m,dp))%mod;
+        
+     
+        
+      
+	}
+};
