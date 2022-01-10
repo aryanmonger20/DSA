@@ -1,0 +1,28 @@
+class Solution
+{
+    public:
+ 
+    struct node *reverse (struct node *head, int k)
+    { 
+        // Complete this method
+        if(head ==NULL||head->next ==NULL){
+            return head;
+        }
+       node* temp1=head,*temp2=NULL,*prev=NULL;
+        int count=0;
+        
+        while(temp1!=NULL && count<k){
+            
+            temp2=temp1->next;
+            temp1->next=prev;
+            prev=temp1;
+            temp1=temp2;
+            count++;
+        }
+        
+        if(temp2!=NULL)
+        head->next=reverse(temp2,k);
+        
+         return prev;
+    }
+};
