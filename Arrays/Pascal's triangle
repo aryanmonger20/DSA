@@ -1,3 +1,4 @@
+//if asked for the whole triangle
 class Solution {
 public:
     vector<vector<int>> generate(int numRows) {
@@ -16,3 +17,30 @@ public:
 	return triangle;
     }
 };
+
+//if asked for a specific row
+vector<ll> nthRowOfPascalTriangle(int n) {
+	// code here
+	ll mod=1000000007;
+	
+  vector<ll> ans;
+  
+  if(n==1)
+  {
+	 ans.push_back(1);
+	 return ans;
+  }
+   
+
+ vector<ll> last= nthRowOfPascalTriangle(n-1);
+  ans.push_back(1);
+ for(int i=1;i<n-1;i++)
+ {
+	 
+	 ll k=(last[i]+last[i-1])%mod;
+	 ans.push_back(k);
+ }
+ ans.push_back(1);
+ return ans;
+ 
+}
