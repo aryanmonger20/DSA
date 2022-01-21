@@ -1,0 +1,50 @@
+class Solution{   
+public:
+    string longestPalindrome(string s){
+        // code here 
+        int n=s.size();
+        
+        int dp[n][n];
+        
+        memset(dp,-1,sizeof(dp));
+        
+         int start=0,maxLen=1;
+         
+          for (int i = 0; i < n; ++i) 
+           dp[i][i] = 1;
+           
+      for (int i = 0; i < n - 1; ++i) {
+          dp[i][i]=1;
+          //checking for substring of length 2.
+            if (s[i] == s[i + 1]) { 
+                dp[i][i + 1] = 1; 
+                if(start==0)
+                { start = i;
+                 //Updating the start
+                maxLen = 2; }
+            } 
+        }
+        
+        for(int len=3;len<=n;len++){ //size of substr
+            for(int str=0;str<n-len+1;str++){
+               
+               int end= len+str-1;
+               
+               if(dp[str+1][end-1]==1 && s[str]==s[end])//Checking for the conditions i.e checking for sub-string from ith index to jth index
+               {dp[str][end]=1;
+                   if(len>maxLen){
+                   maxLen=len;
+                   start =str;
+               }
+               }
+               
+            }
+        }
+       
+    
+        return s.substr(start,maxLen);
+       
+        
+        
+    }
+};
