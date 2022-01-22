@@ -1,0 +1,102 @@
+class LRUCache {
+public:
+    
+  class node{
+      public:
+        int key;
+        int val;
+        node* next;
+        node* prev;
+        
+        node(int _key,int _val){
+            key =_key;
+            val= _val;
+        }
+    };
+    //initialising nodes
+    node *head = new node(-1,-1);
+    node *tail = new node(-1,-1);
+    
+    int cap;
+    unordered_map<int ,node*>m;
+    
+    LRUCache(int capacity) {
+        cap =capacity;
+        head->next=tail;
+        tail->prev=head;
+    }
+    
+    void addNode(node *newnode){
+        node *temp=head->next; // temporarly storing the head next node
+        newnode->next=temp;
+        newnode->prev=head;
+        head->next=newnode;
+        temp->prev=newnode;
+    }
+   
+    
+   
+     void deletenode(node *delnode){
+         node *delprev = delnode->prev;  // node pointing to the prev of the node to be deleted
+         node *delnext=delnode->next; // node pointing to the next of the node to be deleted
+         
+         delprev->next = delnext; // linking of prev node of deleted to next node;
+         delnext->prev = delprev;
+     }
+   
+    
+    int get(int _key) {
+       if( m.find(_key)!=m.end()){
+           
+           node *tempnode=m[_key]; // getting the node from hashmap
+           int res=tempnode->val;
+           m.erase(_key);
+           deletenode(tempnode);// deleting to re add as LRU
+           addNode(tempnode);// re adding as LRU
+          // as it will be added infront of head we can get its value directly to store in map
+           m[_key]=head->next;
+           return res;
+       }
+        return -1; //if not found
+    }
+    
+    
+    void putt(int key, int value) {
+        // if it already existing we have to del the older one as it will be now LRU
+        if(m.find(key)!=m.end()){ 
+            node *existingnode=m[key];
+            m.erase(key);
+            deletenode(existingnode);
+        }
+        // if LRU is full we have to del LRU
+        if(m.size()==cap){
+            m.erase(tail->prev->key); // del from map
+            deletenode(tail->prev); // del from DLL
+        }
+        // if LRU has space simply add
+        addNode(new node(key,value));
+        m[key]=head->next; // storing the address as head->next its next to head cuz its LRU
+        
+    }
+     void put(int key_, int value) {
+        if(m.find(key_) != m.end()) {
+            node* existingnode = m[key_];
+            m.erase(key_);
+            deletenode(existingnode);
+        }
+        if(m.size() == cap) {
+          m.erase(tail->prev->key);
+          deletenode(tail->prev);
+        }
+        
+        addNode(new node(key_, value));
+        m[key_] = head->next; 
+    }
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
