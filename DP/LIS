@@ -1,0 +1,29 @@
+class Solution {
+public:
+    
+     int dp[2502];
+    int solve(vector<int>& nums, int pmax, int index ){
+        
+        if(index==nums.size())
+            return 0;
+        if(dp[index]!=-1)
+            return dp[index];
+        
+             int curSum = 0, maxSum = 0;
+        
+        for(int i=index;i<nums.size();i++){
+            if(nums[i]>pmax){
+                curSum=max(1+solve(nums,nums[i],i+1),solve(nums,pmax,i+1));
+            }
+            maxSum=max(maxSum,curSum);
+        }
+        return dp[index]=maxSum;
+     
+    }
+    
+    
+    int lengthOfLIS(vector<int>& nums) {
+        memset(dp,-1,sizeof(dp));
+        return solve(nums,INT_MIN,0);
+    }
+};
