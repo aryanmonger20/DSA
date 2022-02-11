@@ -1,0 +1,30 @@
+class Solution {
+public:
+     
+    bool wordBreak(string s, vector<string>& wordDict) {
+        vector<int> dp(s.size(),-1);
+       return  solve(0,s,wordDict,dp);
+    }
+    
+    bool solve(int pos,string s,vector<string>& wordDict,vector<int>&dp){
+       
+        int n=s.size();
+        
+        if(pos==n)
+            return true;
+        
+        if(dp[pos]!=-1)
+            return dp[pos];
+        
+        string temp;
+        
+        for(int i=pos;i<n;i++){
+            temp+=s[i];
+            cout<<temp<<endl;
+            if(solve(i+1,s,wordDict,dp) && find(wordDict.begin(),wordDict.end(),temp)!=wordDict.end())
+                return dp[pos]=1;
+        }
+        
+        return dp[pos] =0;
+    }
+};
